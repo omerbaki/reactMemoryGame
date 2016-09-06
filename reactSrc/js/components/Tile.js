@@ -26,7 +26,6 @@ class Tile extends Component {
                       front={this._renderFront()}
                       back={this._renderBack()}
                       isFlipped={this.props.isFlipped}
-                      onFlipped={(val) => {console.log('Flipped: ' + val);}}
                       flipAxis="y"
                       flipEasing={Easing.out(Easing.ease)}
                       flipDuration={500}
