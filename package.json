@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "15.2.1",
     "react-native": "0.31.0",
-    "react-native-flip-card": "^3.3.0"
+    "react-native-flip-card": "^3.3.0",
+    "react-native-flip-view": "^1.0.5"
   }
 }
