@@ -49,14 +49,27 @@ class GameApp extends Component {
         this.setState({
             tiles: TileStore.getAll()
         });
+    }
 
+    reset() {
+        this.setState({
+            tiles: []
+        });
 
+        TileStore.reset();
+
+        setTimeout(function () {
+            this.setState({
+                tiles: TileStore.getAll()
+            });
+        }.bind(this), 2000);
     }
 
     render() {
         return (
             <Board tiles={this.state.tiles}
                    tileFlipped={this.tileFlipped.bind(this)}
+                   reset={this.reset.bind(this)}
                    isWaiting={this.state.isWaiting}>
             </Board>
         );

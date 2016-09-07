@@ -3,10 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
-    ListView
+    ListView,
+    TouchableOpacity
 } from 'react-native';
 
 import Tile from './Tile';
+import ResetButton from './ResetButton';
 
 class Board extends Component {
     constructor(props, context) {
@@ -17,10 +19,18 @@ class Board extends Component {
         this.props.tileFlipped(tileId);
     }
 
+    reset() {
+        this.props.reset();
+    }
+
     render() {
         var tiles = [];
+        var isGameOver = true && this.props.tiles.length > 0;
 
         for (var id in this.props.tiles) {
+            if(!this.props.tiles[id].matched) {
+                isGameOver = false;
+            }
             id = parseInt(id);
             tiles.push(<Tile key={id} id={id} image={this.props.tiles[id].image}
                              tileFlipped={this.tileFlipped.bind(this)}
@@ -30,8 +40,11 @@ class Board extends Component {
         }
 
         return (
-            <View style={styles.container}>
-                {tiles}
+            <View>
+                <View style={styles.container}>
+                    {tiles}
+                </View>
+                <ResetButton reset={this.reset.bind(this)}  isGameOver={isGameOver}/>
             </View>
         );
     }
@@ -40,6 +53,7 @@ class Board extends Component {
 Board.propTypes = {
     tiles: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     tileFlipped: React.PropTypes.func.isRequired,
+    reset: React.PropTypes.func.isRequired,
     isWaiting: React.PropTypes.bool.isRequired
 }
 

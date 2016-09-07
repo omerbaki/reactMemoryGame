@@ -35,6 +35,16 @@ const TileStore = () => {
             return _tiles;
         },
 
+        reset() {
+            for (var id in _tiles) {
+                _tiles[id].flipped = false;
+                _tiles[id].matched = false;
+            }
+
+            _tiles = _.shuffle(_tiles);
+
+        },
+
         tileFlipped(tileIndex) {
             _tiles[tileIndex].flipped = true;
         },
